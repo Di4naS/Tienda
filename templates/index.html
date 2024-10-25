@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Inicio</title>
+    <link rel='stylesheet'  href="{% static 'css/styles.css'%}">
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <div class="logo">logo</div>
+        </div>
+    </div>
+    <div class="right-panel">
+        <form class="login-form">
+            <label for="username">nombre</label>
+            <input type="text" id="username" name="username">
+            <label for="password">contraseña</label>
+            <input type="password" id="password" name="password">
+            <button type="submit">iniciar sesion</button>
+            <p>¿Aun no se ha creado una cuenta? <a href="{% url 'vista_register' %}">¡Registrese ahora!</a></p>
+        </form>
+    </div>
+</body>
+</html>

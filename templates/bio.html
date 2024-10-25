@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio</title>
+
+    <style>
+        .container {
+        max-width: 500px; 
+        margin: 0 auto; 
+        padding: 10px;
+        flex-direction: row; 
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+       <h1 style="margin-right: 20px;">Biografia</h1>
+       <h1>Esta es la bio de la pagina</h1> 
+    </div>
+    
+</body>
+</html>
+{% endblock %}

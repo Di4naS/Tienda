@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <style>
+
+         .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        body {
+            padding-top: 60px;
+        }
+        /* Estilos para la barra de navegación */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f0f0f0;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            max-width: 540px; /* Ancho máximo para la navbar */
+            margin: 55px 0 0 80px;/* Centrar la navbar */
+            position: fixed; /* Fija la barra en la parte superior */
+            top: 0; /* Asegura que esté en la parte superior */
+            left: 0; /* Asegura que esté alineada a la izquierda */
+            z-index: 1000; /* Asegura que esté encima de otros elementos */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="{% url 'vista_inicio' %}">Inicio</a>
+            <a href="{% url 'vista_bio' %}">Bio</a>
+            <a href="{% url 'vista_about' %}">About</a>
+        </div>
+    </div>
+    <div class="content">
+        {% block contenido %}
+        {% endblock %}
+    </div>
+</body>
+</html>

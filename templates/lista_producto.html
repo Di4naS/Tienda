@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block titulo %}
+    Lista de Productos
+{% endblock %}
+
+{% block contenido %}
+    <div class="content-container">
+        <h1>Lista de Productos</h1>
+
+        <form method="GET" action="{% url 'vista_lista_producto' %}">
+            <input type="text" name="buscar" placeholder="Buscar productos..." value="{{ buscar }}" />
+            <button type="submit">Buscar</button>
+        </form>
+
+        <!-- Mensaje de no resultados -->
+        {% if no_resultados %}
+            <p>No se encontraron productos.</p>
+        {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th class="col-acciones">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in lista %}
+                        <tr>
+                            <td>{{ p.id }}</td>
+                            <td>{{ p.nombre }}</td>
+                            <td>
+                                <a href="{% url 'vista_editar_producto' p.id %}">
+                                    <button type="button" class="btn-accion">Editar</button>
+                                </a>
+                                <a href="{% url 'vista_ver_producto' p.id %}">
+                                    <button type="button" class="btn-accion">Ver Detalle</button>
+                                </a>
+                                <form method="POST" action="{% url 'vista_eliminar_producto' p.id %}" style="display:inline;" onsubmit="return confirm('¿Está seguro que quiere eliminar esto?');">
+                                    {% csrf_token %}
+                                    <button type="submit">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+
+    <style>
+
+        body {
+            background-color: #fff; 
+        }
+
+        .content-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center; 
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            width: 500px; /* Ajustar el ancho del campo de búsqueda */
+        }
+
+        button {
+            padding: 8px;
+        }
+
+        .col-acciones {
+            width: 240px;
+            text-align: center;
+        }
+    </style>
+{% endblock %}

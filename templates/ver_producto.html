@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block titulo %}
+    {{p.nombre}}
+{% endblock %}
+
+{% block contenido %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .container {
+            max-width: 500px; 
+            margin: 0 auto; 
+            padding: 10px;
+            flex-direction: column; 
+        }
+
+        .container p, .container img {
+            display: block; 
+            margin: 15px 0; /* Espaciado entre elementos */
+        }
+    </style>
+</head>
+<body>
+     
+    
+    <div class="container">
+
+        <img src="/media/{{p.foto}}" width="250px">
+        <p><b>Descripción:</b> {{p.descripcion}}</p>
+        <p><b>Precio:</b> ${{p.precio}}</p>
+        <p><b>Stock:</b> {{p.stock}}</p>
+        <p><b>Marca:</b> {{p.marca}}</p>
+        {% if categorias %}
+            <h2>Categorias</h2>
+            {% for c in categorias %}
+                <span class="label label-info">{{ c.nombre }}</span>
+            {% empty %}
+                <h3>Sin Categorias</h3>
+            {% endfor %}
+        {% else %}
+            <h3>Sin Categorias</h3>
+        {% endif %}
+        <br>
+        <a href="{% url 'vista_lista_producto' %}">Regresar a la lista</a>
+
+    </div>
+   
+</body>
+</html>
+
+   
+{% endblock %}

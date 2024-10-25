@@ -1,0 +1,57 @@
+{% load static %}
+{% block titulo %}
+
+{% endblock %}
+
+{% block contenido %}
+    <div style="display: flex; justify-content: flex-end; align-items: center; height: 100vh; background-color: #f0f0f0; padding-right: 80px; ">
+      
+        <div style="margin-right: 300px;">
+            <img src="{% static 'img/logo.png' %}" alt="Descripción de la imagen" style="max-width: 300px; height: auto; border-radius: 8px;">
+        </div>
+
+        <div style="background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px; width: 400px; height: 65vh; text-align: center;">
+            <h2>{{ msj }}</h2>
+            <form action="" method="POST" class="login-form">
+                {% csrf_token %}
+                {{ formulario.as_p }}
+                <input type="submit" value="Login" style="background-color: #007bff; color: white; border: none; border-radius: 4px; padding: 10px; cursor: pointer; width: 100%;">
+            </form>
+            <p style="margin-top: 10px;">¿No tienes una cuenta? <a href="{% url 'vista_register' %}">Regístrate aquí</a></p>
+        </div>
+    </div>
+
+    <style>
+        /* Estilos para los campos del formulario */
+        input[type="text"] {
+            width: 70%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-left: 10px;
+            margin-bottom: 15px; 
+            margin-top: 40px;
+        }
+
+        input[type="password"] {
+            width: 70%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-left: 20px;
+            margin-bottom: 15px; 
+        }
+
+        /* Estilos para el botón */
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px;
+            cursor: pointer;
+            width: 40px;
+            margin-top: 100px;
+        }
+    </style>
+{% endblock %}

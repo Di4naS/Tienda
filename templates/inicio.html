@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel='stylesheet'>
+
+    <style>
+        body {
+            background-color: #fff;
+        }
+
+        .profile-menu-container {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 20px;
+            position: absolute;
+            top: 10px;  /* Posiciona el menú cerca del borde superior */
+            right: 10px; /* Posiciona el menú cerca del borde derecho */
+        }
+
+        .profile-menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-menu button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .profile-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .profile-dropdown a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .profile-dropdown a:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Contenedor para los botones */
+        .button-container {
+            display: flex;
+            justify-content: center; /* Centra los botones horizontalmente */
+            gap: 20px; /* Espacio entre los botones */
+            margin-top: 100px; /* Ajusta el margen superior */
+        }
+
+        /* Estilos para el botón de imagen */
+        .inventory-button, .addproducto-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #fff;
+            border: 2px solid #f0f0f0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+            width: 150px; /* Ajusta el ancho del contenedor */
+            height: 200px; /* Alto del contenedor */
+        }
+
+        .inventory-button img, .addproducto-button img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+
+        /* Estilos para el modo oscuro */
+        .dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .dark-mode .navbar, .dark-mode .profile-dropdown, .dark-mode .inventory-button, .dark-mode .addproducto-button {
+            background-color: #444;
+            color: #fff;
+        }
+
+        .dark-mode .navbar .nav-links a, .dark-mode .profile-dropdown a {
+            color: #fff;
+        }
+
+        .dark-mode .profile-dropdown a:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-menu-container">
+        <div class="profile-menu">
+            <button onclick="toggleDropdown()">☰</button>
+            <div id="profileDropdown" class="profile-dropdown">
+
+                <a href="{% url 'vista_perfil' %}">Perfil</a> 
+                <a href="{% url 'vista_logout' %}">Cerrar Sesión</a>
+                <a href="#" onclick="toggleDarkMode()">Modo Oscuro</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenedor para los botones -->
+    <div class="button-container">
+        <a href="{% url 'vista_lista_producto' %}" class="inventory-button">
+            <img src="{% static 'img/inventory.png' %}" alt="Inventario">
+            <span>Inventario</span>
+        </a>
+
+        <a href="{% url 'vista_agregar_producto' %}" class="addproducto-button">
+            <img src="{% static 'img/add.png' %}" alt="Agregar Producto">
+            <span>Agregar Producto</span>
+        </a>
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            var dropdown = document.getElementById("profileDropdown");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.profile-menu button')) {
+                var dropdowns = document.getElementsByClassName("profile-dropdown");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+
+{% endblock %}
